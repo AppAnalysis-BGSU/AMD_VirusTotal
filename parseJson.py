@@ -38,6 +38,7 @@ for filePath in jsonResultList:
 	with open(filePath) as jsonData:
 		parsedJson = json.load(jsonData) 
 		allScanResults=parsedJson['scans']
+		#trueCount=0 ## Use this count if the assumption is at least N antiviruses should complain the APK as malicious. 
 		for antiVirusNames in allScanResults:
 			results=allScanResults[str(antiVirusNames)]
 			if results['detected']==True:
