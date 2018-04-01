@@ -25,7 +25,7 @@ for root, dirs, files in os.walk(directory):
         if myfile.endswith(".json"):
             jsonResultList.append(os.path.join(root, myfile))
 
-print(jsonResultList)
+#print(jsonResultList)
 
 print('Sha256'+','+'Result') # Print the header 
 
@@ -44,4 +44,5 @@ for filePath in jsonResultList:
 				jsonFileName=os.path.basename(filePath)
 				apkName=jsonFileName.replace('.json','') # Remove .json 
 				print(apkName+','+'True')
-				break 
+				break
+	jsonData.close()
