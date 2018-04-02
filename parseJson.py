@@ -25,8 +25,6 @@ for root, dirs, files in os.walk(directory):
         if myfile.endswith(".json"):
             jsonResultList.append(os.path.join(root, myfile))
 
-#print(jsonResultList)
-
 print('Sha256'+','+'Result') # Print the header 
 
 '''
@@ -36,14 +34,21 @@ and Prints the result.
 '''
 for filePath in jsonResultList:
 	with open(filePath) as jsonData:
+		resultsdict={'True':0,'False':0}
 		parsedJson = json.load(jsonData) 
 		allScanResults=parsedJson['scans']
-		#trueCount=0 ## Use this count if the assumption is at least N antiviruses should complain the APK as malicious. 
+		trueCount=0
 		for antiVirusNames in allScanResults:
 			results=allScanResults[str(antiVirusNames)]
 			if results['detected']==True:
-				jsonFileName=os.path.basename(filePath)
-				apkName=jsonFileName.replace('.json','') # Remove .json 
-				print(apkName+','+'True')
-				break
+				resultsdict['True']+=1 
+			else:
+				resultsdict['False']+=1
+		print(resultsdict)
+		jsonFileName=os.path.basename(filePath)
+		apkName=jsonFileName.replace('.json','')
+		if resultsdict['True']>0:
+			print(apkName+','+'True')
+		else:
+			print(apkName+','+'False')
 	jsonData.close()
