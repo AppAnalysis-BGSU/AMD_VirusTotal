@@ -35,16 +35,23 @@ and Prints the result.
 for filePath in jsonResultList:
 	with open(filePath) as jsonData:
 		resultsdict={'True':0,'False':0}
-		parsedJson = json.load(jsonData) 
-		allScanResults=parsedJson['scans']
+		parsedJson = json.load(jsonData)
+		try:
+			allScanResults=parsedJson['scans']
+		except KeyError:
+			print(apkName+','+'NA')
+			continue
 		trueCount=0
 		for antiVirusNames in allScanResults:
 			results=allScanResults[str(antiVirusNames)]
-			if results['detected']==True:
-				resultsdict['True']+=1 
-			else:
-				resultsdict['False']+=1
-		print(resultsdict)
+			try:
+				if results['detected']==True:
+					resultsdict['True']+=1 
+				else:
+					resultsdict['False']+=1
+			except KeyError:
+				continue
+		#print(resultsdict)
 		jsonFileName=os.path.basename(filePath)
 		apkName=jsonFileName.replace('.json','')
 		if resultsdict['True']>0:
