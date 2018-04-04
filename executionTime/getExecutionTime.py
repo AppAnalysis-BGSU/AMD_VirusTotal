@@ -1,9 +1,9 @@
 '''
-Walks through the directory recursively and returns the list of files. 
+First argument: Directory. Walks through the directory recursively and gets the path to APK files. 
+Second Argument: path to resultFile: The file where result of LockScreen plugin is stored. 
+Third Argument: Path to the file where execution time is stored. 
 
-Example, python getFileList.py $folder. 
-
-If you want to store the result in a text file, python getFileList.py $folder >>amdFileList.py
+Example, python getExecutionTime.py $Path_to_apkFolder $Path_to_resultFile.txt $Path_to_execTimeFile 
 '''
 
 import os
