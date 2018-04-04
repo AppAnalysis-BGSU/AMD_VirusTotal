@@ -15,10 +15,30 @@ fileContent=open(resultFile)
 
 for line in fileContent:
     try:
+        print(line)
         line=line.strip().split(',')
         execTime=float(line[1])
-        execTime=(math.ceil(execTime*100))/100
-        print(execTime)
+        execTime=(math.ceil(execTime*100))/100 # Round off to two decimal digits. 
+        execTimeList.append(execTime)
     except IndexError:
         print("Invalid line")
+
+execTimeList.sort()
+fileContent.close()
+
+#print(execTimeList)
+total=0
+for times in execTimeList:
+    total=total+times
+
+avg=total/len(execTimeList)
+minimum=execTimeList[0]
+maximum=execTimeList[len(execTimeList)-1]
+
+print("Total apps:"+ str(len(execTimeList)))
+print("Average: " + str(avg))
+print("Minimum: "+ str(minimum))
+print("Maximum: "+ str(maximum))
+
+
 
