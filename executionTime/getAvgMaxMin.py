@@ -8,6 +8,9 @@ import numpy as np
 import math
 import sys 
 
+def roundOff(number):
+    return (math.ceil(number*100))/100
+
 resultFile=sys.argv[1] 
 execTimeList=[]
 
@@ -18,7 +21,7 @@ for line in fileContent:
         print(line)
         line=line.strip().split(',')
         execTime=float(line[1])
-        execTime=(math.ceil(execTime*100))/100 # Round off to two decimal digits. 
+        execTime=roundOff(execTime) # Round off to two decimal digits. 
         execTimeList.append(execTime)
     except IndexError:
         print("Invalid line")
@@ -31,7 +34,7 @@ total=0
 for times in execTimeList:
     total=total+times
 
-avg=total/len(execTimeList)
+avg=roundOff(total/len(execTimeList))
 minimum=execTimeList[0]
 maximum=execTimeList[len(execTimeList)-1]
 
